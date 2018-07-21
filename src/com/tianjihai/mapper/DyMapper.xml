@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianjihai.mapper.DyMapper">
+
+<!-- 结果集的映射 自动一一映射到实体类 -->
+  <resultMap id="BaseResultMap" type="com.tianjihai.dao.Dy">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mname" jdbcType="VARCHAR" property="mname" />
+    <result column="mactor" jdbcType="VARCHAR" property="mactor" />
+    <result column="mdaoyan" jdbcType="VARCHAR" property="mdaoyan" />
+    <result column="mdiqu" jdbcType="VARCHAR" property="mdiqu" />
+    <result column="mjie" jdbcType="VARCHAR" property="mjie" />
+    <result column="mfenshu" jdbcType="VARCHAR" property="mfenshu" />
+    <result column="mpic" jdbcType="VARCHAR" property="mpic" />
+    <result column="mpicy" jdbcType="VARCHAR" property="mpicy" />
+  </resultMap>
+
+
+  <update id="updateDy" parameterType="java.lang.Integer">
+    update dy set mname=#{mname}, mactor=#{mactor},
+    mdaoyan=#{mdaoyan},mdiqu=#{mdiqu},mjie=#{mjie},
+    mfenshu=#{mfenshu}
+    where id = #{id}
+  </update>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select id, mname, mactor, mdaoyan, mdiqu, mjie, mfenshu, mpic,mpicy
+    from dy where id = #{id} 
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, mname, mactor, mdaoyan, mdiqu, mjie, mfenshu, mpic,mpicy
+    from dy
+  </select>
+  
+  <!--  parameterType 传入DY实体类参数  在mybatis配置文件中没设置别名所以需要写全名-->
+    <insert id="insert" parameterType="com.tianjihai.dao.Dy">
+    insert into dy (id, mname, mactor, 
+      mdaoyan, mdiqu, mjie, 
+      mfenshu, mpic, mpicy)
+    values (#{id}, #{mname}, #{mactor}, 
+      #{mdaoyan}, #{mdiqu}, #{mjie}, 
+      #{mfenshu}, #{mpic},  #{mpicy})
+  </insert>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dy
+    where id = #{id}
+  </delete>
+  
+
+</mapper>

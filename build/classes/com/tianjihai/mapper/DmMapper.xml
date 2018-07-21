@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianjihai.mapper.DmMapper">
+  <resultMap id="BaseResultMap" type="com.tianjihai.dao.Dm">
+    <id column="did" jdbcType="INTEGER" property="did" />
+    <result column="dname" jdbcType="VARCHAR" property="dname" />
+    <result column="dactor" jdbcType="VARCHAR" property="dactor" />
+    <result column="ddaoyan" jdbcType="VARCHAR" property="ddaoyan" />
+    <result column="ddiqu" jdbcType="VARCHAR" property="ddiqu" />
+    <result column="djie" jdbcType="VARCHAR" property="djie" />
+    <result column="dfenshu" jdbcType="VARCHAR" property="dfenshu" />
+    <result column="dpic" jdbcType="VARCHAR" property="dpic" />
+    <result column="dpicy" jdbcType="VARCHAR" property="dpicy" />
+  </resultMap>
+
+
+  <update id="updateDm" parameterType="java.lang.Integer">
+    update dm set dname=#{dname}, dactor=#{dactor},
+    ddaoyan=#{ddaoyan},ddiqu=#{ddiqu},djie=#{djie},
+    dfenshu=#{dfenshu}
+    where did = #{did}
+  </update>
+  
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+     select did, dname, dactor, ddaoyan, ddiqu, djie, dfenshu, dpic,dpicy
+    from dm where did = #{did} 
+    <!-- where id = 1 -->
+
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select did, dname, dactor, ddaoyan, ddiqu, djie, dfenshu, dpic,dpicy
+    from dm
+  </select>
+  
+<!--  parameterType 传入DY实体类参数 -->
+  <insert id="insert" parameterType="com.tianjihai.dao.Dy">
+    insert into dm (did, dname, dactor, 
+      ddaoyan, ddiqu, djie, 
+      dfenshu, dpic, dpicy)
+    values (#{did}, #{dname}, #{dactor}, 
+      #{ddaoyan}, #{ddiqu}, #{djie}, 
+      #{dfenshu}, #{dpic},  #{dpicy})
+  </insert>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dm
+    where did = #{did}
+  </delete>
+  
+  
+
+</mapper>

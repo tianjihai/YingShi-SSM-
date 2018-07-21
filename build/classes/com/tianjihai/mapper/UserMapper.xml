@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianjihai.mapper.UserMapper">
+<!-- 结果集的映射 自动一一映射到实体类 -->
+  <resultMap id="BaseResultMap" type="com.tianjihai.dao.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="pwd" jdbcType="VARCHAR" property="pwd" />
+  </resultMap>
+      <!--  parameterType 传入实体类参数  在mybatis配置文件中没设置别名所以需要写全名-->
+  <insert id="insert" parameterType="com.tianjihai.dao.User">
+    insert into user (id, account, pwd)
+    values (#{id}, #{account}, #{pwd})
+  </insert>
+  
+   <select id="selectAll" resultMap="BaseResultMap">
+    select * from user
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id}
+  </delete>
+  
+  	<select id="login" parameterType="com.tianjihai.dao.User" resultType="int">
+		select count(*) from user where account=#{account} and pwd=#{pwd}
+	</select>
+  
+    <select id="pd" resultMap="BaseResultMap" parameterType="com.tianjihai.dao.User"> 
+    select id, account, pwd
+    from user
+    where account =#{account} 
+  </select>
+  
+
+</mapper>

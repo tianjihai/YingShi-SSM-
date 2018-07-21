@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianjihai.mapper.AdUserMapper">
+  <resultMap id="BaseResultMap" type="com.tianjihai.dao.AdUser">
+    <id column="adid" jdbcType="INTEGER" property="adid" />
+    <result column="adname" jdbcType="VARCHAR" property="adname" />
+    <result column="adpass" jdbcType="VARCHAR" property="adpass" />
+  </resultMap>
+  
+  <insert id="insert" parameterType="com.tianjihai.dao.AdUser">
+    insert into aduser (adid, adname, adpass)
+    values (#{adid}, #{adname}, #{adpass})
+  </insert>
+  
+   	<select id="adlogin" parameterType="com.tianjihai.dao.AdUser" resultType="int">
+		select count(*) from aduser where adname=#{adname} and adpass=#{adpass}
+	</select> 
+  
+    <select id="adpd" resultMap="BaseResultMap" parameterType="com.tianjihai.dao.AdUser"> 
+    select adid, adname, adpass
+    from aduser
+    where adname =#{adname} 
+
+  </select>
+  
+
+</mapper>
